@@ -1,0 +1,83 @@
+<div ng-controller="bookmark_controller">
+	<div class="row">
+		<div class="col-md-8">
+		<table class="table">
+			<tbody>
+				<tr>
+				<td><input class="form-control" type="text" ng-model="data.content" placeholder="Details"></td>
+				<td><input class="form-control" type="text" ng-model="data.url" placeholder="Url"></td>
+				<td><button class="btn btn-primary" ng-click='addBookmark(data)'>Add Bookmark</button></td>
+				<td>&nbsp</td>
+			</tr>
+			</tbody>
+		</table>
+		<table class="table ">
+			<thead>
+				<th>Details</th>
+				<th>Url</th>
+				<th>Add</th>
+				<th>&nbsp</th>
+				<th>&nbsp</th>
+				<th>&nbsp</th>
+			</thead>
+		<tbody>
+			<tr>
+				<td><h5>SEARCH BOOKMARKS</h5></td>
+				<td><input type="text" ng-model="query_content" class="form-control"></td>
+				<td>&nbsp</td>
+			</tr>
+			<tr ng-repeat="bookmark in bookmarks |filter:query_content">
+				<td>{{bookmark.content}}</td>
+				<td>{{bookmark.url}}</td>
+				<td>added {{bookmark.created_at | getTimeOffset}}</td>
+				<td><button class="btn btn-success" ng-click="openurl(bookmark.url)">OPEN</button></td>
+				<td><button class="btn btn-danger" ng-click="delete(bookmark._id)">REMOVE</button></td>
+				<td><button class="btn btn-primary" ng-click="open(bookmark.url,bookmark.content)">Share</button></td>
+			</tr>
+			
+		</tbody>
+		</table>
+		</div>
+		<div class="col-md-4">
+			<table class="table">
+				<thead>
+					<th>Shared Bookmarks</th>
+					<th>&nbsp</th>
+				</thead>
+				<tbody>
+					<tr ng-repeat="sbookmark in  sbookmarks">
+						<td>
+							<h4 style="text-decoration:underline;">{{sbookmark.title}}</h4>
+							<h6>{{sbookmark.url}}</h6>
+							<h6>by {{sbookmark.name}}</h6>
+						</td>
+						<td><button class="btn btn-success" ng-click="openurl(sbookmark.url)">OPEN</button></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	
+
+	 
+
+	  <div modal="showModal" close="cancel()" style="background-color: white;opacity: 0.78">
+		    <div class="modal-header">
+		        <h4>Share {{shareurl}}  With </h4>
+		    </div>
+		    <div class="modal-body">
+		        <table class="table">
+		        	<tbody>
+		        		<tr ng-repeat="people in peoples">
+		        			<td>{{people.displayName}}</td>
+		        			<td><button class="btn btn-success" ng-click='share(people.userid,sharecontent,shareurl)'>Share</button></td>
+		        		</tr>
+		        	</tbody>
+		        </table>
+		    </div>
+		    <div class="modal-footer">
+		      <button class="btn" ng-click="cancel()">Cancel</button>
+		    </div>
+	  </div>
+
+</div> 

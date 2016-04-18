@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html ng-app="mytodo">
+<head>
+	<title>Express Todo</title>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/bootstrap.js"></script>
+	<script type="text/javascript" src="js/angular.min.js"></script>
+	<script type="text/javascript" src="js/angular-route.js"></script>
+	<script type="text/javascript" src="angular/custom_routing.js"></script>
+	<script type="text/javascript" src="angular/todos.js"></script>
+	<script type="text/javascript" src="js/moment.js"></script>
+	<script type="text/javascript" src="angular/bookmark.js"></script>
+	<script type="text/javascript" src="js/ui-bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/animate.css">
+</head>
+<body >  
+	<div class="container-fluid">
+		<nav class="navbar" style="background-color:#ccf3ff">
+			<div class="navbar-header">
+				<a href="#" class="navbar-brand">ExpressTodo</a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li>
+					<a href="#/login" ng-show="!currentUser">Login</a>
+				</li>
+				<li>
+					<a href="#/todos" ng-show="currentUser">Todos</a>
+				</li>
+				<li>
+					<a href="#/bookmarks" ng-show="currentUser">Bookmarks</a>
+				</li>
+					<li  ng-controller="logoutCtrl" ng-show="currentUser" ng-click="logout()">
+					      		<a href="#"><span class="glyphicon glyphicon-user" ></span>Logout</a>
+					</li>
+			</ul>
+			<ul class="nav navbar-nav pull-right">
+				<li>
+					<a href="#/todo" ng-show="currentUser">{{currentUser.displayName}}&nbsp&nbsp&nbsp<img src={{currentUser.photoUrl}}></a>
+				</li>
+			</ul>
+		</nav>
+		<div ng-view>	
+		</div>
+	</div>
+
+</body>
+</html>
